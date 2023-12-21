@@ -1,12 +1,12 @@
-import { ApiExtensionContext } from '@directus/extensions';
+import { HookExtensionContext } from '@directus/extensions';
 import { createError } from '@directus/errors';
 
 export class HookUtils {
 
   extensionName: string;
-  apiExtensionContext: ApiExtensionContext;
+  apiExtensionContext: HookExtensionContext;
 
-  constructor(extensionName: string, apiExtensionContext: ApiExtensionContext) {
+  constructor(extensionName: string, apiExtensionContext: HookExtensionContext) {
     this.extensionName = extensionName;
     this.apiExtensionContext = apiExtensionContext;
   }

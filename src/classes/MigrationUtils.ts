@@ -1,5 +1,5 @@
 import { HookUtils } from './HookUtils';
-import { ApiExtensionContext } from '@directus/extensions';
+import { HookExtensionContext } from '@directus/extensions';
 import { createError } from '@directus/errors';
 import * as fs from 'node:fs';
 import path from 'node:path';
@@ -11,7 +11,7 @@ export class MigrationUtils extends HookUtils {
   extensionMigrationPath: string;
   directusMigrationsPath: string;
 
-  constructor(extensionName: string, apiExtensionContext: ApiExtensionContext) {
+  constructor(extensionName: string, apiExtensionContext: HookExtensionContext) {
     super(extensionName, apiExtensionContext);
     const { env } = this.getContext();
     const __filename = fileURLToPath(import.meta.url);
