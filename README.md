@@ -58,4 +58,13 @@ export default defineHook(({ filter, action }, apiExtensionContext) => {
 		hookUtils.syncMigrations();
 	});
 });
-```
+````
+
+
+
+## Development
+- Add this as a file-dependency to a package-json of a directus-extension
+- Run `pnpm i` on this repo
+- Run `pnpm i` & `pmpm dev` on the extension
+- Check in the directus project
+- --> repeat
