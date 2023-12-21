@@ -33,7 +33,11 @@ export class MigrationUtils extends HookUtils {
     try {
       
       const newMigrationFIles = this.getNewMigrationFiles();
-      
+
+      if (newMigrationFIles.length === 0) {
+        logger.info(this.getLoggerMessage('No new migrations', 'ℹ️'));
+      }
+
       // Copy each file to the migrations folder if it doesn't exist there yet
       newMigrationFIles.forEach((file) => {
         const sourceFilePath = path.join(this.extensionMigrationPath, file);
