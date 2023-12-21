@@ -1,0 +1,44 @@
+{
+  "name": "directus-dev-utils",
+  "version": "0.0.1",
+  "description": "🐰 Helpful utils for developing directus extensions",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "unbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/utomic-media/directus-dev-utils"
+  },
+  "keywords": [
+    "directus",
+    "directus-extension",
+    "directus-utils"
+  ],
+  "author": "Dominic Marcelino | Utomic Media <dominic.marcelino@utomic.media> (https://utomic.media/) ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/utomic-media/directus-dev-utils/issues"
+  },
+  "homepage": "https://github.com/utomic-media/directus-dev-utils#readme",
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "unbuild": "^2.0.0"
+  },
+  "dependencies": {
+    "@directus/errors": "^0.2.0",
+    "@directus/extensions": "^0.2.0"
+  }
+}
