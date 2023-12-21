@@ -50,7 +50,7 @@ export class MigrationUtils extends HookUtils {
       logger.info(this.getLoggerMessage(`Syncing migrations completed...`, '✅'));
     } catch (error: any) {
       // TODO: test error
-      const errorMessage = this.getLoggerMessage(`Syncing migrations failed: ${error.message}`);
+      const errorMessage = this.getLoggerMessage(`Syncing migrations failed: ${error.message}`, '❌');
       const MigrationsSyncFailed = createError('MIGRATION_SYNC_FAILED', errorMessage, 503);
       throw new MigrationsSyncFailed();
     }
