@@ -46,7 +46,7 @@ export class HookUtils {
   }
 
 
-  protected getLoggerMessage(message: string) {
-    return `[${this.getExtensionName()}] [DEV-UTILS]: ${message}`;
+  protected getLoggerMessage(message: string, messagePrefix='') {
+    return `${messagePrefix} [${this.getExtensionName()}] [DEV-UTILS]: ${message}`;
   }
 }

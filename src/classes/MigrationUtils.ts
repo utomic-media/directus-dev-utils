@@ -28,7 +28,7 @@ export class MigrationUtils extends HookUtils {
    */
   public syncMigrations() {
     const { logger } = this.getContext();
-    logger.info(this.getLoggerMessage(`Start syncing migrations...`));
+    logger.info(this.getLoggerMessage(`Start syncing migrations...`, '🚀'));
 
     try {
       
@@ -40,10 +40,10 @@ export class MigrationUtils extends HookUtils {
         const targetFilePath = path.join(this.directusMigrationsPath, file);
         
         fs.copyFileSync(sourceFilePath, targetFilePath);
-        logger.info(this.getLoggerMessage(`Copied migration file: ${file}`));
+        logger.info(this.getLoggerMessage(`Copied migration file: ${file}`, '✔️'));
       });
 
-      logger.info(this.getLoggerMessage(`Syncing migrations completed...`));
+      logger.info(this.getLoggerMessage(`Syncing migrations completed...`, '✅'));
     } catch (error: any) {
       // TODO: test error
       const errorMessage = this.getLoggerMessage(`Syncing migrations failed: ${error.message}`);
