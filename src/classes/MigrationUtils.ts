@@ -1,5 +1,5 @@
 import { HookUtils } from './HookUtils';
-import { HookExtensionContext } from '@directus/extensions';
+import type { HookExtensionContext } from '@directus/extensions';
 import { createError } from '@directus/errors';
 import * as fs from 'node:fs';
 import path from 'node:path';
