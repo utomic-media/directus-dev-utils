@@ -6,7 +6,7 @@
 > 💡 Some helpful utils when developing directus extensions.
 
 > [!WARNING]
-> THIS IS NOT A EXTENSION ITSELF! IT'S A DEV-UTIL THAT CAN BE USED BY DEVELOPERS WHILE CREATING EXTENSIONS!**
+> This is not an extension itself! It's a dev-util that can be used by developers while developing extensions.
 
 ## 🎉 Features
 - Add migrations from an extension
