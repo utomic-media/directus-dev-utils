@@ -77,4 +77,27 @@ export class MigrationUtils extends HookUtils {
     return newMigrationFiles;
   }
 
+
+  public registerMigrationCliCommand(program: any) {
+    const devUtilsCommands = program.command('devUtils');
+
+    const commandExists = devUtilsCommands.commands.find((command: any) => command._name === 'syncMigrations');
+    if (commandExists) {
+      return;
+    }
+
+    devUtilsCommands
+			.command('syncMigrations')
+			.description(
+				'Emits the `syncMigration` event to all extensions using the dev-utils migrations tool. This should sync all custom migrations to the `migrations` folder.'
+			)
+			.action(async () => {
+        const { logger, emitter } = this.getContext();
+        
+        logger.info(this.getLoggerMessage(`...Requested to sync all dev-utils based migrations to the migrations base-folder...`, '✅'));
+				emitter.emitFilter('devUtils:syncMigrations');
+        logger.info(this.getLoggerMessage("Don't forget to run the migrtions via `npx directus database migrate:latest`", '❕'));
+      });
+  }
+
 }
