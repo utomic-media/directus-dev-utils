@@ -25,23 +25,37 @@ pnpm i -D directus-dev-utils
 ## Usage
 1. Add this module as a dev-dependency to your extension
 2. Add a `migrations` folder to your extensions `src` folder (see [#configuration](#-configuration))
-3. Init the module: `const hookUtils = new HookUtils('<extensionName>', apiExtensionContext);`
-4. Use the config and make your live easier
+3. Init the module in your extension: `const hookUtils = new HookUtils('<extensionName>', apiExtensionContext);`
+4. Register the CLI commands and add the emit-watcher
+5. Use the utils and make your live easier
 
 **Example:**
 ````ts
 import { defineHook } from '@directus/extensions-sdk';
-import { HookUtils } from 'directus-dev-utils';
+import { HookExtensionContext } from '@directus/extensions';
+import { MigrationUtils } from 'directus-dev-utils';
 
-export default defineHook(({ filter, action }, apiExtensionContext) => {
-	action('server.start', () => {
-		console.log('Server started');
 
-		const hookUtils = new HookUtils('<extensionName>', apiExtensionContext);
-		hookUtils.syncMigrations();
+export default defineHook(({ filter, action, init }, apiExtensionContext: HookExtensionContext) => {
+	const { emitter } = apiExtensionContext;
+	const migrationUtils = new MigrationUtils('gravatar', apiExtensionContext);
+
+	init('cli.before', async ({ program }) => {
+		migrationUtils.registerMigrationCliCommand(program);
 	});
+
+	emitter.onFilter('devUtils:syncMigrations', async () => {
+		migrationUtils.syncMigrations();
+	});
+
 });
 ````
+
+### Creating migrations
+To create a migration add a new file to your extensions `migrations` folder. Make sure to use a unique name.
+Directus requires the schema: `[identifier]-[name].js` [(read docs)](https://docs.directus.io/extensions/migrations.html#file-name)
+
+We recommend to use your extension-name as a prefix for the name. For example: `20231202A-myExtension-my-custom-migration.js`
 
 
 ## 🔧 Configuration
