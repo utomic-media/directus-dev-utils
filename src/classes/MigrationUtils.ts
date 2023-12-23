@@ -28,7 +28,7 @@ export class MigrationUtils extends HookUtils {
    */
   public syncMigrations() {
     const { logger } = this.getContext();
-    logger.info(this.getLoggerMessage(`Start syncing migrations...`, '🚀'));
+    logger.info(this.getLoggerMessage(`Start syncing migrations for extension ${this.getExtensionName()}...`, '🚀'));
 
     try {
       
