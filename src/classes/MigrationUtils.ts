@@ -36,6 +36,7 @@ export class MigrationUtils extends HookUtils {
 
       if (newMigrationFIles.length === 0) {
         logger.info(this.getLoggerMessage('No new migrations', 'ℹ️'));
+        return;
       }
 
       // Copy each file to the migrations folder if it doesn't exist there yet
