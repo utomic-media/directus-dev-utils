@@ -78,6 +78,9 @@ export class MigrationUtils extends HookUtils {
   }
 
 
+  /**
+   * Registers a cli command to the directus cli in order to sync all custom migrations to the directus migrations folder 
+   */
   public registerMigrationCliCommand(program: any) {
     const devUtilsCommands = program.command('devUtils');
 
