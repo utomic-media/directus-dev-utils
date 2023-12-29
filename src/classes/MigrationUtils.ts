@@ -6,6 +6,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 
+// @see https://github.com/directus/directus/blob/main/api/src/types/migration.ts
+type Migration = {
+	version: string;
+	name: string;
+	timestamp: Date;
+};
+
+
 export class MigrationUtils extends HookUtils {
 
   extensionMigrationPath: string;
@@ -97,11 +105,35 @@ export class MigrationUtils extends HookUtils {
 			)
 			.action(async () => {
         const { logger, emitter } = this.getContext();
-        
-        logger.info(this.getLoggerMessage(`...Requested to sync all dev-utils based migrations to the migrations base-folder...`, '✅'));
-				emitter.emitFilter('devUtils:syncMigrations');
-        logger.info(this.getLoggerMessage("Don't forget to run the migrtions via `npx directus database migrate:latest`", '❕'));
-      });
-  }
 
+
+  /**
+   * Makes sure that the migrations have been run. Can be called on server-start to warn users about missing migrations
+   * @since 0.0.1
+   */
+  public async requireMigrations() {
+    const { database } = this.getContext();
+    const completedMigrations = await database.select<Migration[]>('*').from('directus_migrations').orderBy('version');
+    const migrationFiles = this.getMigrationFiles();
+
+    const missingMigrations = [] as string[];
+
+    migrationFiles.forEach((filePath) => {
+      // @see https://github.com/directus/directus/blob/main/api/src/database/migrations/run.ts#L43
+      const version = filePath.split('-')[0];
+      // const name = formatTitle(filePath.split('-').slice(1).join('_').split('.')[0]!);
+      const completed = !!completedMigrations.find((migration: Migration) => migration.version === version);
+
+      if (!completed) {
+        missingMigrations.push(filePath);
+      }
+      return;
+    });
+
+    if (missingMigrations.length > 0) {
+      const errorMessage = this.getLoggerMessage(`There are missing migrations: ${missingMigrations.join(', ')}`, '❌');
+      const MissingMigrationsException = createError('MISSING_MIGRATIONS', errorMessage, 503);
+      throw new MissingMigrationsException();
+    }
+  }
 }
