@@ -103,8 +103,20 @@ export class MigrationUtils extends HookUtils {
 			.description(
 				'Emits the `syncMigration` event to all extensions using the dev-utils migrations tool. This should sync all custom migrations to the `migrations` folder.'
 			)
-			.action(async () => {
+      .action(async () => {
         const { logger, emitter } = this.getContext();
+        try {        
+          logger.info(this.getLoggerMessage(`...Requested to sync all dev-utils based migrations to the migrations base-folder...`, '✅'));
+          emitter.emitFilter('devUtils:syncMigrations');
+          logger.info(this.getLoggerMessage("Don't forget to run the migrtions via `npx directus database migrate:latest`", '❕'));
+          process.exit();
+        }
+        catch (error: any) {
+          logger.error(this.getLoggerMessage(`Syncing migrations failed: ${error}`, '❌'));
+          process.exit(1);
+        }
+      });
+  }
 
 
   /**
