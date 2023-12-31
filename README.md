@@ -40,18 +40,11 @@ import { HookExtensionContext } from '@directus/extensions';
 import { MigrationUtils } from 'directus-dev-utils';
 
 
-export default defineHook(({ filter, action, init }, apiExtensionContext: HookExtensionContext) => {
-	const { emitter } = apiExtensionContext;
-	const migrationUtils = new MigrationUtils('gravatar', apiExtensionContext);
-
-	init('cli.before', async ({ program }) => {
-		migrationUtils.registerMigrationCliCommand(program);
-	});
-
-	emitter.onFilter('devUtils:syncMigrations', async () => {
-		migrationUtils.syncMigrations();
-	});
-
+export default defineHook((registerFunctions, apiExtensionContext: HookExtensionContext) => {
+	// Init the migrationUtils automatically registeres the emitter, CLI-Command, and Migration check on sverer startup
+	const migrationUtils = new MigrationUtils('gravatar', registerFunctions, apiExtensionContext);
+	migrationUtils.initMigrationUtils();
+	// That's all - keep coding!
 });
 ````
 
