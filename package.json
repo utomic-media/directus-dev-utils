@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@directus/errors": "^0.2.0",
-    "@directus/extensions": "^0.2.0"
+    "@directus/extensions": "^0.2.0",
+    "@directus/types": "^11.0.3"
   }
 }

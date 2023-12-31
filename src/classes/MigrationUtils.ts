@@ -4,6 +4,7 @@ import { createError } from '@directus/errors';
 import * as fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import type { RegisterFunctions } from '../types';
 
 
 // @see https://github.com/directus/directus/blob/main/api/src/types/migration.ts
@@ -18,8 +19,9 @@ export class MigrationUtils extends HookUtils {
 
   extensionMigrationPath: string;
   directusMigrationsPath: string;
+  registerFunctions: RegisterFunctions;
 
-  constructor(extensionName: string, apiExtensionContext: HookExtensionContext) {
+  constructor(extensionName: string, registerFunctions: RegisterFunctions, apiExtensionContext: HookExtensionContext) {
     super(extensionName, apiExtensionContext);
     const { env } = this.getContext();
     const __filename = fileURLToPath(import.meta.url);
@@ -27,6 +29,29 @@ export class MigrationUtils extends HookUtils {
 
     this.directusMigrationsPath = path.join(process.cwd(), env['MIGRATIONS_PATH'] || '/extensions/migrations');
     this.extensionMigrationPath = path.join(__dirname, '/migrations');
+    this.registerFunctions = registerFunctions;
+  }
+
+
+  /**
+   * Inits the migration utils cli, emitter & actions
+   * @since 0.0.1
+   */
+  public initMigrationUtils() {
+    const { init, action } = this.registerFunctions;
+    const { emitter } = this.getContext();
+
+    init('cli.before', async ({ program }) => {
+      this.registerMigrationCliCommand(program);
+    });
+  
+    emitter.onFilter('devUtils:syncMigrations', async () => {
+      this.syncMigrations();
+    });
+  
+    action('server.start', () => {
+      this.requireMigrations();
+    })
   }
 
 
@@ -34,7 +59,7 @@ export class MigrationUtils extends HookUtils {
    * Allows to sync migrations from a local extensions folder to the directus migrations folder
    * @since 0.0.1
    */
-  public syncMigrations() {
+  private syncMigrations() {
     const { logger } = this.getContext();
     logger.info(this.getLoggerMessage(`Start syncing migrations for extension ${this.getExtensionName()}...`, '🚀'));
 
@@ -90,7 +115,7 @@ export class MigrationUtils extends HookUtils {
   /**
    * Registers a cli command to the directus cli in order to sync all custom migrations to the directus migrations folder 
    */
-  public registerMigrationCliCommand(program: any) {
+  private registerMigrationCliCommand(program: any) {
     const devUtilsCommands = program.command('devUtils');
 
     const commandExists = devUtilsCommands.commands.find((command: any) => command._name === 'syncMigrations');
@@ -123,7 +148,7 @@ export class MigrationUtils extends HookUtils {
    * Makes sure that the migrations have been run. Can be called on server-start to warn users about missing migrations
    * @since 0.0.1
    */
-  public async requireMigrations() {
+  private async requireMigrations() {
     const { database } = this.getContext();
     const completedMigrations = await database.select<Migration[]>('*').from('directus_migrations').orderBy('version');
     const migrationFiles = this.getMigrationFiles();
