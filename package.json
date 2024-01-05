@@ -7,6 +7,10 @@
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./extension-config": {
+      "import": "./dist/extension-config/index.mjs",
+      "require": "./dist/extension-config/index.cjs"
     }
   },
   "main": "./dist/index.cjs",

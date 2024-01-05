@@ -2,6 +2,11 @@ import ts from "typescript";
 import type { CopyOptions } from "rollup-plugin-copy";
 
 
+/**
+ * ExtensionConfig is a helper class prodividing the needed configuration to the directus-extensions-sdk rolup extension config
+ * !! NOTE: DO NOT MOVE THIS CLASS TO THE DEFAULT BUNDLE OF THIS PACKAGE !!
+ * !!      This will will cause the directus-extensions-sdk to be bundled it into the extensions output (including TYPESCRIPT!!)
+ */
 export class ExtensionConfig {
 
   public compileTs(input: string) { 
@@ -41,7 +46,7 @@ export class ExtensionConfig {
           src: 'src/migrations/**/*.ts',
           dest: 'dist/migrations',
           transform: (contents, _filename) => this.compileTs(contents.toString()),
-          rename: (name, _extension, _fullPath: any) => `${name}.js`
+          rename: (name, _extension, _fullPath) => `${name}.js`
         }
       ]
     };
