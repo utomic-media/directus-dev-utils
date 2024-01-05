@@ -1,7 +1,7 @@
 import { HookUtils } from './HookUtils';
 import type { HookExtensionContext } from '@directus/extensions';
 import { createError } from '@directus/errors';
-import * as fs from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { RegisterFunctions } from '../types';
