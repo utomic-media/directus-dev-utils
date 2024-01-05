@@ -85,8 +85,8 @@ export default {
 
 
 ## Development
-- Add this as a file-dependency to a package-json of a directus-extension
-- Run `pnpm i` on this repo
+- Add this as a file-dependency to a package-json of a directus-extension (e.g `"directus-dev-utils": "file:../../github-utomic/directus-dev-utils"`)
+- Run `pnpm i` & `pmpm dev`  on this repo
 - Run `pnpm i` & `pmpm dev` on the extension
-- Check in the directus project
-- --> repeat
+- Check in the directus project (here you also can install the <u>extension</u> as a local dependency)
+- --> repeat (note: `pnpm i` will always re-install local dependencies to make sure they're up to date!)
