@@ -41,5 +41,9 @@
     "@directus/errors": "^0.2.0",
     "@directus/extensions": "^0.2.0",
     "@directus/types": "^11.0.3"
+  },
+  "peerDependencies": {
+    "rollup-plugin-copy": "^3.5.0",
+    "typescript": "^5.3.3"
   }
 }

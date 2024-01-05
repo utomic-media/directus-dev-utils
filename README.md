@@ -54,6 +54,17 @@ Directus requires the schema: `[identifier]-[name].js` [(read docs)](https://doc
 
 We recommend to use your extension-name as a prefix for the name. For example: `20231202A-myExtension-my-custom-migration.js`
 
+> [!TIP]
+> When using the dev-utils you can use typescript to write your extensions. They will be transpiled while colying. 
+> 
+> *This may slow down the build process a bit, as we spin up a tsc compiler.*
+
+> [!IMPORTANT]  
+> Imported dependencies in migrations won't be bundled into the final migration! 
+> This means that any dependency you use, must also be installed on the final directus project!
+
+
+
 
 ## 🔧 Configuration
 If you're building your extension with the directus extensions-sdk  you'll need to create and add the migrations folder to the dist output of the build process. You can do that by installing [`rollup-plugin-copy`](https://www.npmjs.com/package/rollup-plugin-copy) in your extension and [add it as a plugin](https://docs.directus.io/extensions/creating-extensions.html#configuring-the-cli). The result will look like this:
