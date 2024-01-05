@@ -59,9 +59,11 @@ We recommend to use your extension-name as a prefix for the name. For example: `
 > 
 > *This may slow down the build process a bit, as we spin up a tsc compiler.*
 
-> [!IMPORTANT]  
+> [!Warning]  
 > Imported dependencies in migrations won't be bundled into the final migration! 
 > This means that any dependency you use, must also be installed on the final directus project!
+>
+> Also the rollup watcher from the extension-sdk won't recognize any changes to the migrations folder. Make sure to restart a build to reflect the changes!
 
 
 
