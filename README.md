@@ -71,16 +71,12 @@ If you're building your extension with the directus extensions-sdk  you'll need 
 
 ````ts
 // extension.config.js
-
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
+import { ExtensionConfig } from 'directus-dev-utils';
 
 export default {
   plugins: [
-    copy({
-      targets: [
-        { src: 'src/migrations/**/*', dest: 'dist/migrations' }
-      ]
-    })
+    copy(new ExtensionConfig().getRollupCopyConfig()),
   ],
 };
 ````
