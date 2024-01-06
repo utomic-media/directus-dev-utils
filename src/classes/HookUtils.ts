@@ -1,5 +1,7 @@
 import type { HookExtensionContext } from '@directus/extensions';
 import { createError } from '@directus/errors';
+import { defu } from "defu";
+
 
 export class HookUtils {
 
@@ -33,15 +35,21 @@ export class HookUtils {
    * Makes sure an env required by the extension is set
    * @since 0.0.1
    */
-  public requireEnv(name: string) {
+  public requireEnv(name: string, _options?: { throwError?: boolean }) {
     const { logger, env } = this.getContext();
+
+    const options = defu(_options, {
+      throwError: false,
+    });
   
     if (!env[name]) {
-      // TODO: make add strictness parameter: Log error vs throw error / cancle server start
       const errorMessage = this.getLoggerMessage(`Required env-variable '${name}' is missing`);
-      const InvalidConfigException = createError('INVALID_CONFIG', errorMessage, 503)
       logger.error(errorMessage);
-      throw new InvalidConfigException;
+
+      if (options.throwError) {
+        const InvalidConfigException = createError('INVALID_CONFIG', errorMessage, 503);
+        throw new InvalidConfigException;
+      }
     }
   }
 
@@ -51,10 +59,14 @@ export class HookUtils {
   }
 
 
-  public async requireExtension(extensionBundle: string | null, extensionName: string) {
+  public async requireExtension(extensionBundle: string | null, extensionName: string, _options?: { throwError?: boolean }) {
     const { services, logger, database, getSchema } = this.apiExtensionContext;
     const { ExtensionsService } = services;
     const schema = await getSchema();
+
+    const options = defu(_options, {
+      throwError: false,
+    });
 
     const extensionsService = new ExtensionsService({
       knex: database,
@@ -66,12 +78,24 @@ export class HookUtils {
     const extension = await extensionsService.readOne(extensionBundle, extensionName);
 
     if (!extension) {
-      logger.error(this.getLoggerMessage(`Required extension is missing: ${extensionBundle}/${extensionName}`));
+      const errorMessage = this.getLoggerMessage(`Required extension is missing: ${extensionBundle}/${extensionName}`)
+      logger.error(errorMessage);
+
+      if (options.throwError) {
+        const ExtensionNotFoundException = createError('EXTENSION_NOT_FOUND', errorMessage, 503);
+        throw new ExtensionNotFoundException;
+      }
       return false;
     }
 
     if (!extension.meta.enabled) {
-      logger.error(this.getLoggerMessage(`Required extension is disabled: ${extensionBundle}/${extensionName}`));
+      const errorMessage = this.getLoggerMessage(`Required extension is disabled: ${extensionBundle}/${extensionName}`)
+      logger.error(errorMessage);
+
+      if (options.throwError) {
+        const ExtensionDisabledException = createError('EXTENSION_DISABLED', errorMessage, 503);
+        throw new ExtensionDisabledException;
+      }
       return false;
     }
 
