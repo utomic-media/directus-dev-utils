@@ -34,7 +34,7 @@
     "directus-utils"
   ],
   "author": "Dominic Marcelino | Utomic Media <dominic.marcelino@utomic.media> (https://utomic.media/) ",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/utomic-media/directus-dev-utils/issues"
   },
