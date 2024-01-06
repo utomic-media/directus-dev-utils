@@ -49,4 +49,32 @@ export class HookUtils {
   protected getLoggerMessage(message: string, messagePrefix='') {
     return `${messagePrefix} [${this.getExtensionName()}] [DEV-UTILS]: ${message}`;
   }
+
+
+  public async requireExtension(extensionBundle: string | null, extensionName: string) {
+    const { services, logger, database, getSchema } = this.apiExtensionContext;
+    const { ExtensionsService } = services;
+    const schema = await getSchema();
+
+    const extensionsService = new ExtensionsService({
+      knex: database,
+      accountability: {
+        admin: true, // use admin accountability to allow extensions read
+      },
+      schema: schema,
+    });
+    const extension = await extensionsService.readOne(extensionBundle, extensionName);
+
+    if (!extension) {
+      logger.error(this.getLoggerMessage(`Required extension is missing: ${extensionBundle}/${extensionName}`));
+      return false;
+    }
+
+    if (!extension.meta.enabled) {
+      logger.error(this.getLoggerMessage(`Required extension is disabled: ${extensionBundle}/${extensionName}`));
+      return false;
+    }
+
+    return true;
+  }
 }
