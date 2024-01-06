@@ -6,11 +6,13 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./extension-config": {
       "import": "./dist/extension-config/index.mjs",
-      "require": "./dist/extension-config/index.cjs"
+      "require": "./dist/extension-config/index.cjs",
+      "types": "./dist/extension-config/index.d.ts"
     }
   },
   "main": "./dist/index.cjs",
