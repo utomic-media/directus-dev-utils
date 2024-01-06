@@ -9,9 +9,9 @@
 > This is not an extension itself! It's a dev-util that can be used by developers while developing extensions.
 
 ## 🎉 Features
-- Add migrations from an extension
-- Require extensions
-- Require environmental variables
+- **Add migrations from an extension**
+- **Require extensions**
+- **Require environmental variables**
 
 
 ## ⚙️ Installation
@@ -27,7 +27,7 @@ pnpm i -D directus-dev-utils
 
 
 
-## Features
+## Docs & Examples
 ### Require-env
 This helper allows you to make sure a specific env exists. It's recommended to use it in a server start hook. 
 The function takes two parameters:
