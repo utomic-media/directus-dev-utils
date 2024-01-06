@@ -92,7 +92,7 @@ export default defineHook((registerFunctions, apiExtensionContext: HookExtension
 > [!TIP]
 > The `MigrationUtils` class is an extension of `HookUtils`. Therewith you can use all HookUtils functions from a MigrationUtils instance too!
 
-> [!NOTE]
+> [!Important]
 > When using the dev-utils you can use typescript to write your extensions. They will be transpiled while bundeling. 
 > *This may slow down the build process a bit, as we spin up a tsc compiler.*
 > 
