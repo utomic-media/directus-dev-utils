@@ -23,7 +23,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "unbuild",
-    "release": "release-it"
+    "release": "npm run build && release-it --github.releaseName='v${version}' "
   },
   "repository": {
     "type": "git",
