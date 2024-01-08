@@ -1,6 +1,6 @@
 {
   "name": "directus-dev-utils",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "🐰 Helpful utils for developing directus extensions",
   "type": "module",
   "exports": {
@@ -22,7 +22,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "unbuild"
+    "build": "unbuild",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,9 @@
   "homepage": "https://github.com/utomic-media/directus-dev-utils#readme",
   "devDependencies": {
     "@types/node": "^20.10.4",
-    "unbuild": "^2.0.0"
+    "release-it": "^17.0.1",
+    "unbuild": "^2.0.0",
+    "@release-it/conventional-changelog": "^8.0.1"
   },
   "dependencies": {
     "@directus/errors": "^0.2.0",
