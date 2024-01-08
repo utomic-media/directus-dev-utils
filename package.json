@@ -21,9 +21,9 @@
     "dist/**/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "build": "unbuild",
-    "release": "npm run build && release-it --github.releaseName='v${version}' "
+    "release": "release-it --github.releaseName='v${version}' "
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,3 @@
-
-
 ## [1.0.2](https://github.com/utomic-media/directus-dev-utils/compare/1.0.1...1.0.2) (2024-01-08)
 
 ## 1.0.1 (2024-01-08)
