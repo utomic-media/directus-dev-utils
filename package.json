@@ -22,7 +22,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "unbuild"
+    "build": "unbuild",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
   "homepage": "https://github.com/utomic-media/directus-dev-utils#readme",
   "devDependencies": {
     "@types/node": "^20.10.4",
+    "release-it": "^17.0.1",
     "unbuild": "^2.0.0"
   },
   "dependencies": {
