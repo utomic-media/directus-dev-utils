@@ -49,6 +49,7 @@
     "@directus/errors": "^0.2.0",
     "@directus/extensions": "^0.2.0",
     "@directus/types": "^11.0.3",
+    "@release-it/conventional-changelog": "^8.0.1",
     "defu": "^6.1.4"
   },
   "peerDependencies": {
