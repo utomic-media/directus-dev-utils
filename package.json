@@ -43,13 +43,13 @@
   "devDependencies": {
     "@types/node": "^20.10.4",
     "release-it": "^17.0.1",
-    "unbuild": "^2.0.0"
+    "unbuild": "^2.0.0",
+    "@release-it/conventional-changelog": "^8.0.1"
   },
   "dependencies": {
     "@directus/errors": "^0.2.0",
     "@directus/extensions": "^0.2.0",
     "@directus/types": "^11.0.3",
-    "@release-it/conventional-changelog": "^8.0.1",
     "defu": "^6.1.4"
   },
   "peerDependencies": {
