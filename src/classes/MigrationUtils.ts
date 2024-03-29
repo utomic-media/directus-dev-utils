@@ -1,10 +1,9 @@
 import { HookUtils } from './HookUtils';
-import type { HookExtensionContext } from '@directus/extensions';
+import type { HookExtensionContext, RegisterFunctions } from '@directus/extensions';
 import { createError } from '@directus/errors';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { RegisterFunctions } from '../types';
 
 
 // @see https://github.com/directus/directus/blob/main/api/src/types/migration.ts

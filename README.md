@@ -77,11 +77,11 @@ The `MigrationUtils` allows you to add and require migrations from your extensio
 **Example**
 ````ts
 import { defineHook } from '@directus/extensions-sdk';
-import { HookExtensionContext } from '@directus/extensions';
+import { HookExtensionContext, RegisterFunctions } from '@directus/extensions';
 import { MigrationUtils } from 'directus-dev-utils';
 
 
-export default defineHook((registerFunctions, apiExtensionContext: HookExtensionContext) => {
+export default defineHook((registerFunctions: RegisterFunctions, apiExtensionContext: HookExtensionContext) => {
 	// Init the migrationUtils automatically registeres the emitter, CLI-Command, and Migration check on server startup
 	const migrationUtils = new MigrationUtils('gravatar', registerFunctions, apiExtensionContext);
 	migrationUtils.initMigrationUtils();
