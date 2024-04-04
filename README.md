@@ -59,7 +59,7 @@ export default ({ filter, action }, apiExtensionContext) => {
 	const hookUtils = new HookUtils('<yourExtensionName>', apiExtensionContext);
 	
 	action('server.start', () => {
-		hookUtils.requireExtension('directus-extension-field-actions', 'display'); // NOTE: you can add optional options
+		hookUtils.requireExtension('display', 'directus-extension-field-actions'); // NOTE: you can add optional options
 	});
 };
 ```
