@@ -1,3 +1,10 @@
+
+
+* Merge branch 'main' of github.com:utomic-media/directus-dev-utils (b8011a0)
+* Merge pull request #5 from utomic-media/fix/extensions-read (cbdb91d)
+* CHORE: minor dependency update (254ddb7)
+* FIX: requireExtension compatability with directus 10.4 (2783e3b)
+
 ## [1.0.2](https://github.com/utomic-media/directus-dev-utils/compare/1.0.1...1.0.2) (2024-01-08)
 
 ## 1.0.1 (2024-01-08)
