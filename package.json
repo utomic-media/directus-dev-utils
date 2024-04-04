@@ -42,14 +42,14 @@
   "homepage": "https://github.com/utomic-media/directus-dev-utils#readme",
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.1",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.4",
     "release-it": "^17.1.1",
     "unbuild": "^2.0.0"
   },
   "dependencies": {
     "@directus/errors": "^0.2.4",
-    "@directus/extensions": "^1.0.1",
-    "@directus/types": "^11.0.7",
+    "@directus/extensions": "^1.0.2",
+    "@directus/types": "^11.0.8",
     "defu": "^6.1.4"
   },
   "peerDependencies": {
