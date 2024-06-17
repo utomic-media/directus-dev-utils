@@ -1,5 +1,12 @@
 
 
+## [1.0.4](https://github.com/utomic-media/directus-dev-utils/compare/v1.0.3...v1.0.4) (2024-06-17)
+
+
+### Bug Fixes
+
+* allow explict "false" value on requireEnv ([595650d](https://github.com/utomic-media/directus-dev-utils/commit/595650df2131dbafb6c24886960ad724c2e1ef7b))
+
 * Merge branch 'main' of github.com:utomic-media/directus-dev-utils (b8011a0)
 * Merge pull request #5 from utomic-media/fix/extensions-read (cbdb91d)
 * CHORE: minor dependency update (254ddb7)

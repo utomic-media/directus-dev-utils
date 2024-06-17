@@ -1,6 +1,6 @@
 {
   "name": "directus-dev-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "🐰 Helpful utils for developing directus extensions",
   "type": "module",
   "exports": {
