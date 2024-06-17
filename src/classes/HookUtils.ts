@@ -50,7 +50,7 @@ export class HookUtils {
       throwError: false,
     });
   
-    if (!env[name]) {
+    if (env[name] === undefined || env[name] === null) {
       const errorMessage = this.getLoggerMessage(`Required env-variable '${name}' is missing`);
       logger.error(errorMessage);
 
