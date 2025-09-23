@@ -1,9 +1,7 @@
 ![](./docs/Directus-Dev-Utils.png)
 
 # 🐰 Directus Dev-utils
-
-> [!NOTE]
-> 💡 Some helpful utils when developing directus extensions.
+💡 Some helpful utils when developing directus extensions.
 
 > [!WARNING]
 > This is not an extension itself! It's a dev-util that can be used by developers while developing extensions.
